@@ -6,13 +6,12 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
-
 stages:
 - stage: "Prepare"
   jobs:
     - job: "Prepare"
+      pool:
+        vmImage: 'ubuntu-latest'
       steps:
       - bash: wget -O hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
       - bash: mkdir -p hugobin

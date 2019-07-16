@@ -6,17 +6,20 @@
 trigger:
 - master
 
+variables:
+  HUGO_VERSION: 0.49
+
 stages:
 - stage: "Prepare"
-  variables:
-    HUGO_VERSION: 0.49
   jobs:
     - job: "Prepare"
       pool:
         vmImage: 'ubuntu-latest'
       steps:
-      - bash: wget -O hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
-      - bash: mkdir -p hugobin
-      - bash: tar -xzvf hugo.tar.gz -C ./hugobin
-      - bash: mv ./hugobin/hugo $HOME/gopath/bin
-      - bash: rm hugo.tar.gz && rm -rf ./hugobin
+      - bash: |
+          wget -O hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
+          mkdir -p hugobin
+          mkdir -p /home/mike
+          tar -xzvf hugo.tar.gz -C ./hugobin
+          mv ./hugobin/hugo /home/mike/gopath/bin
+          hugo.tar.gz && rm -rf ./hugobin

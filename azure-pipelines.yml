@@ -10,7 +10,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: bash build-docs.sh
-  displayName: 'Build docs'
+- script: bash build-docs.sh prerequisites
+  displayName: 'Prerequisites'
 
+- script: bash build-docs.sh build
+  displayName: 'Build docs'
 

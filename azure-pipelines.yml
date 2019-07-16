@@ -25,7 +25,7 @@ stages:
           mv go /usr/local
           go version
           wget -O hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
-          mkdir -p hugobin
+          mkdir -p hugobin ~/gopath/bin 
           tar -xzvf hugo.tar.gz -C ./hugobin
           mv ./hugobin/hugo ~/gopath/bin
           hugo.tar.gz && rm -rf ./hugobin

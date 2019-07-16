@@ -9,10 +9,13 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: bash build-docs.sh prerequisites
-  displayName: 'Prerequisites'
-
-- script: bash build-docs.sh build
-  displayName: 'Build docs'
-
+stages:
+- stage: "Prepare"
+  jobs:
+    - job: "Prepare"
+      steps:
+      - bash: wget -O hugo.tar.gz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz"
+      - bash: mkdir -p hugobin
+      - bash: tar -xzvf hugo.tar.gz -C ./hugobin
+      - bash: mv ./hugobin/hugo $HOME/gopath/bin
+      - bash: rm hugo.tar.gz && rm -rf ./hugobin
